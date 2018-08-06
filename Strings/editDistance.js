@@ -13,9 +13,7 @@ module.exports = {
   isOneOrLessEditDistance: (strA, strB) => {
     const stringDistance = strA.length - strB.length;
 
-    if(stringDistance > 1 || stringDistance < -1){
-      return false;
-    }
+    if (stringDistance > 1 || stringDistance < -1) return false;
 
     let score = 0;
     let skip = 0;
@@ -25,17 +23,15 @@ module.exports = {
 
       if (aIndex >= strA.length) break;
 
-      if (strA[aIndex] === strB[i]) { continue; }
+      if (strA[aIndex] === strB[i]) continue;
 
       score++;
 
-      if (strA.length > strB.length) {
-        skip++;
-      }
+      if (score > 1) break;
 
-      if (strA.length < strB.length) {
-        skip--;
-      }
+      if (strA.length > strB.length) skip++;
+
+      if (strA.length < strB.length) skip--;
     }
 
     return score <= 1 && score >= -1;
