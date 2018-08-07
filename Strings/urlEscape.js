@@ -7,32 +7,32 @@
 // Output: "Mr%20John%20Smith"
 
 // Note, we don't do a string time and replace here as it seems a bit easy an is probably less efficient
-
+// @flow
 module.exports = {
-  urlEscape: (str) => { // O(N)
-    const strArray = str.split("");
+    urlEscape: (str: string) => { // O(N)
+        const chars = str.split("");
 
-    strArray.reverse();
+        chars.reverse();
 
-    let firstCharFound = false;
+        let firstCharFound: boolean = false;
 
-    const escapedArray = strArray.map((char) => {
-      if (!firstCharFound && char === " ") {
-        return;
-      }
-      else if (!firstCharFound && char !== " ") {
-        firstCharFound = true;
-      }
+        const escapedArray = chars.map((char) => {
+            if (!firstCharFound && char === " ") {
+                return;
+            }
+            else if (!firstCharFound && char !== " ") {
+                firstCharFound = true;
+            }
 
-      if (char === " ") {
-        return "%20"
-      }
+            if (char === " ") {
+                return "%20"
+            }
 
-      return char;
-    });
+            return char;
+        });
 
-    escapedArray.reverse();
+        escapedArray.reverse();
 
-    return escapedArray.join("");
-  }
+        return escapedArray.join("");
+    }
 };

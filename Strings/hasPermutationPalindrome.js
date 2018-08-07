@@ -4,54 +4,55 @@
 // EXAMPLE
 // Input: Tact Coa
 // Output: True (permutations: "taco cat". "atco cta". etc.)
-
+// @flow
 module.exports = {
-  hasPermutationPalindrome: (str) => { // O(N)
-    const strLowerCase = str.toLowerCase();
-    const countMap = toCountHashmap(strLowerCase.split(""));
-    const counts = getOddsAndEvensCount(countMap);
+    hasPermutationPalindrome: (str: string) => { // O(N)
+        const strLowerCase = str.toLowerCase();
 
-    if(isEven(countMap.length)){
-        return counts.odds === 0;
+        const countMap = toCountHashmap(strLowerCase.split(""));
+        const counts = getOddsAndEvensCount(countMap);
+
+        if (isEven(countMap.length)) {
+            return counts.odds === 0;
+        }
+
+        return counts.odds <= 1;
     }
-
-    return counts.odds <= 1;
-  }
 };
 
-const getOddsAndEvensCount = (countMap)=>{
-  const counts = {
-    evens: 0,
-    odds: 0
-  };
+const getOddsAndEvensCount = (countMap) => {
+    const counts = {
+        evens: 0,
+        odds: 0
+    };
 
-  for (let key in countMap) {
-    if (isEven(countMap[key])) {
-      counts.evens++;
-    } else{
-      counts.odds++;
+    for (let key in countMap) {
+        if (isEven(countMap[key])) {
+            counts.evens++;
+        } else {
+            counts.odds++;
+        }
     }
-  }
 
-  return counts;
+    return counts;
 };
 
 const isEven = (num) => {
-  return num % 2 === 0;
+    return num % 2 === 0;
 };
 
 const toCountHashmap = (str) => {
-  const charMap = {};
+    const charMap = {};
 
-  str.forEach((char) => {
-    if(char === " ") return;
+    str.forEach((char) => {
+        if (char === " ") return;
 
-    if (charMap[char] === undefined) {
-      charMap[char] = 1;
-    } else {
-      charMap[char]++;
-    }
-  });
+        if (charMap[char] === undefined) {
+            charMap[char] = 1;
+        } else {
+            charMap[char]++;
+        }
+    });
 
-  return charMap;
+    return charMap;
 };
