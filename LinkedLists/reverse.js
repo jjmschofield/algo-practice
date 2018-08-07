@@ -1,18 +1,19 @@
-const { LinkedNode } = require("./LinkedNode");
+// @flow
+const { LinkedListNode } = require("./LinkedListNode");
 
 module.exports = {
-  reverse: (headNode) => {
-    let currentNode = headNode;
+    reverse: (headNode: LinkedListNode) => {
+        let currentNode = headNode;
 
-    let newHead = null;
+        let newHead : ?LinkedListNode = null;
 
-    while (currentNode != null) {
-      const newNode = new LinkedNode(currentNode.data);
-      newNode.next = newHead;
-      newHead = newNode;
-      currentNode = currentNode.next;
+        while (currentNode != null) {
+            const newNode = new LinkedListNode(currentNode.data);
+            newNode.next = newHead;
+            newHead = newNode;
+            currentNode = currentNode.next;
+        }
+
+        return newHead;
     }
-
-    return newHead;
-  }
 };
